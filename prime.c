@@ -33,11 +33,12 @@ if( m_get_myid() ==0){
     int a;
 printf("\nenter a number to check if prime or not: ");
 scanf("%d", &a);
+value[0] = a;
 m_lock();
 if(is_prime(a)){
-printf("\n%d is prime\n", a);
+printf("\n%d is prime\n", value[0]);
 }else{
-printf("\n%d is not prime\n", a);
+printf("\n%d is not prime\n", value[0]);
 }
 
 
@@ -58,6 +59,7 @@ int main() {
      m_set_procs(0);
     m_fork(check);
     m_kill_procs();
+
     clean();
     return 0;
 }
