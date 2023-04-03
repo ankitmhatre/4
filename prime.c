@@ -28,18 +28,24 @@ bool is_prime(int num) {
 void check()
 {
 
-int b = m_get_myid();
-printf("id  = %d", b);
+if( m_get_myid() ==0){
+
     int a;
-printf("enter a number to check if prime or not: ");
+printf("\nenter a number to check if prime or not: ");
 scanf("%d", &a);
 m_lock();
-printf("%d\n", is_prime(a));
-printf("%d\n", a);
+if(is_prime(a)){
+printf("\n%d is prime\n", a);
+}else{
+printf("\n%d is not prime\n", a);
+}
+
 
 m_unlock();
-
+}else{
+printf("Process id is not 0 as requested");
   
+}
 }
 
 int main() {
@@ -49,20 +55,9 @@ int main() {
    // srand( (unsigned int) time(NULL));
 
     value = (int *)shmalloc(sizeof(int));
-     m_set_procs(8);
+     m_set_procs(0);
     m_fork(check);
     m_kill_procs();
-
-//printf("value = %d\n", value[0]);
-    // int num = rand() % 10000 + 1;
-    
-    // printf("Randomly generated number: %d\n", num);
-    
-    // if (is_prime(num)) {
-    //     printf("%d is a prime number\n", num);
-    // } else {
-    //     printf("%d is not a prime number\n", num);
-    // }
     clean();
     return 0;
 }
